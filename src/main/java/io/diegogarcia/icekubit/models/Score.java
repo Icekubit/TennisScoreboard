@@ -7,4 +7,20 @@ public class Score {
     private int winningGamesOfSecondPlayer;
     private int pointsOfFirstPlayer;
     private int pointsOfSecondPlayer;
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "winningSetsOfFirstPlayer=" + winningSetsOfFirstPlayer +
+                ", winningSetsOfSecondPlayer=" + winningSetsOfSecondPlayer +
+                ", winningGamesOfFirstPlayer=" + winningGamesOfFirstPlayer +
+                ", winningGamesOfSecondPlayer=" + winningGamesOfSecondPlayer +
+                ", pointsOfFirstPlayer=" + pointsOfFirstPlayer +
+                ", pointsOfSecondPlayer=" + pointsOfSecondPlayer +
+                '}';
+    }
+
+    public void addPoint() {
+        pointsOfFirstPlayer++;
+    }
 }

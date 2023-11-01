@@ -1,6 +1,7 @@
 package io.diegogarcia.icekubit.servlets;
 
 import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.Score;
 import io.diegogarcia.icekubit.services.OngoingMatchesService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,12 +18,21 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
         Match match = OngoingMatchesService.getInstance().getMatch(matchId);
-//        resp.getWriter().write(matchId + ": " + match);
-        String score = match.getScore().toString();
-//        request.setAttribute("player1", player1);
-//        request.setAttribute("player2", player2);
+        Score score = match.getScore();
         request.setAttribute("score", score);
+        request.setAttribute("matchId", matchId);
         System.out.println(score);
+        request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String matchId = request.getParameter("uuid");
+        request.setAttribute("matchId", matchId);
+        Match match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
+        Score score = match.getScore();
+        score.addPoint();
+        request.setAttribute("score", score);
         request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
     }
 }

@@ -3,10 +3,13 @@ package io.diegogarcia.icekubit;
 import io.diegogarcia.icekubit.models.HelloWorldEntity;
 import io.diegogarcia.icekubit.models.Match;
 import io.diegogarcia.icekubit.models.Player;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+
+import java.util.List;
 
 public class HelloWorldDatabaseManager {
     private static SessionFactory sessionFactory;
@@ -35,6 +38,12 @@ public class HelloWorldDatabaseManager {
 
         Match match1 = session.get(Match.class, 1);
         System.out.println(match1);
+
+        String hql = "FROM Player p WHERE p.name = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", "Player1");
+        List<Player> results = query.getResultList();
+        System.out.println("results = " + results);
 
         transaction.commit();
 

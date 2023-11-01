@@ -11,6 +11,22 @@ public class Match {
         score = new Score();
     }
 
+    public int getFirstPlayerId() {
+        return firstPlayerId;
+    }
+
+    public void setFirstPlayerId(int firstPlayerId) {
+        this.firstPlayerId = firstPlayerId;
+    }
+
+    public int getSecondPlayerId() {
+        return secondPlayerId;
+    }
+
+    public void setSecondPlayerId(int secondPlayerId) {
+        this.secondPlayerId = secondPlayerId;
+    }
+
     public Score getScore() {
         return score;
     }

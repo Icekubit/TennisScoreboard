@@ -67,4 +67,27 @@ public class PlayerDao {
 
         return player;
     }
+
+    public Player getPlayerById(int playerId) {
+        Player player = null;
+
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+
+        String hql = "FROM Player p WHERE p.id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", playerId);
+        player = (Player) query.getResultList().get(0);
+
+
+
+
+
+        transaction.commit();
+
+        session.close();
+
+        return player;
+    }
 }

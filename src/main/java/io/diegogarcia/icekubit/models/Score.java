@@ -20,7 +20,11 @@ public class Score {
                 '}';
     }
 
-    public void addPoint() {
+    public void addFirstPlayerPoints() {
         pointsOfFirstPlayer++;
+    }
+
+    public void addSecondPlayerPoints() {
+        pointsOfSecondPlayer++;
     }
 }

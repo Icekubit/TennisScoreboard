@@ -1,7 +1,7 @@
 package io.diegogarcia.icekubit;
 
 import io.diegogarcia.icekubit.models.HelloWorldEntity;
-import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.MatchEntity;
 import io.diegogarcia.icekubit.models.Player;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
@@ -19,7 +19,7 @@ public class HelloWorldDatabaseManager {
         sessionFactory = new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(HelloWorldEntity.class)
                 .addAnnotatedClass(Player.class)
-                .addAnnotatedClass(Match.class)
+                .addAnnotatedClass(MatchEntity.class)
                 .buildSessionFactory();
 
         Session session = sessionFactory.openSession();
@@ -27,17 +27,17 @@ public class HelloWorldDatabaseManager {
 
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
-        Match match = new Match();
-        match.setPlayer1(player1);
-        match.setPlayer2(player2);
-        match.setWinner(player1);
+        MatchEntity matchEntity = new MatchEntity();
+        matchEntity.setPlayer1(player1);
+        matchEntity.setPlayer2(player2);
+        matchEntity.setWinner(player1);
         session.save(player1);
         session.save(player2);
-        session.save(match);
+        session.save(matchEntity);
 
 
-        Match match1 = session.get(Match.class, 1);
-        System.out.println(match1);
+        MatchEntity matchEntity1 = session.get(MatchEntity.class, 1);
+        System.out.println(matchEntity1);
 
         String hql = "FROM Player p WHERE p.name = :name";
         Query query = session.createQuery(hql);

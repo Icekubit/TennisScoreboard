@@ -18,15 +18,6 @@ public class MainServlet extends HttpServlet {
         message = "Hello World!";
     }
 
-//    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        response.setContentType("text/html");
-//
-//        PrintWriter out = response.getWriter();
-//        out.println("<html><body>");
-//        out.println("<h1>" + message + "</h1>");
-//        out.println("</body></html>");
-//    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("WEB-INF/jsp/firstjsp.jsp").forward(request, response);
     }

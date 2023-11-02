@@ -2,6 +2,7 @@ package io.diegogarcia.icekubit.servlets;
 
 import io.diegogarcia.icekubit.models.Match;
 import io.diegogarcia.icekubit.models.Score;
+import io.diegogarcia.icekubit.services.FinishedMatchesPersistenceService;
 import io.diegogarcia.icekubit.services.MatchScoreCalculationService;
 import io.diegogarcia.icekubit.services.OngoingMatchesService;
 import io.diegogarcia.icekubit.services.PlayerService;
@@ -33,13 +34,24 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String matchId = request.getParameter("uuid");
         int playerId = Integer.valueOf(request.getParameter("id"));
-        System.out.println(playerId);
         request.setAttribute("matchId", matchId);
         Match match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
-        MatchScoreCalculationService.getInstance().addPoint(match, playerId);
+        boolean isFinished = MatchScoreCalculationService.getInstance().addPoint(match, playerId);
         request.setAttribute("match", match);
         request.setAttribute("firstPlayer", request.getParameter("firstPlayer"));
         request.setAttribute("secondPlayer", request.getParameter("secondPlayer"));
-        request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
+        if (!isFinished)
+            request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
+        else {
+            String winner;
+            if (playerId == match.getFirstPlayerId())
+                winner = request.getParameter("firstPlayer");
+            else
+                winner = request.getParameter("secondPlayer");
+            request.setAttribute("winner", winner);
+            FinishedMatchesPersistenceService.getInstance().save(match);
+            OngoingMatchesService.getInstance().deleteMatch(UUID.fromString(matchId));
+            request.getRequestDispatcher("WEB-INF/jsp/match-result.jsp").forward(request, response);
+        }
     }
 }

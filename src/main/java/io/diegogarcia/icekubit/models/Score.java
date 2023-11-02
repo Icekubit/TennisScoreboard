@@ -19,6 +19,10 @@ public class Score {
         return isFinished;
     }
 
+    public int getWinningSetsOfFirstPlayer() {
+        return winningSetsOfFirstPlayer;
+    }
+
     @Override
     public String toString() {
         return "Score{" +

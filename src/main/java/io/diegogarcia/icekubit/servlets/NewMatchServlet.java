@@ -1,9 +1,6 @@
 package io.diegogarcia.icekubit.servlets;
 
-import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.Player;
 import io.diegogarcia.icekubit.services.OngoingMatchesService;
-import io.diegogarcia.icekubit.services.PlayerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.UUID;
 
 @WebServlet(value = "/new-match")
@@ -22,7 +18,7 @@ public class NewMatchServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String nameOfPlayer1 = req.getParameter("player1");
         String nameOfPlayer2 = req.getParameter("player2");
 

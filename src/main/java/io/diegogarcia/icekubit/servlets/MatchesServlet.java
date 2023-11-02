@@ -14,6 +14,14 @@ public class MatchesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("allMatches", FinishedMatchesPersistenceService.getInstance().findAll());
+        request.setAttribute("isThereNextPage", true);
+        request.getRequestDispatcher("WEB-INF/jsp/all-matches-view.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("allMatches", FinishedMatchesPersistenceService.getInstance().findAll());
+        request.setAttribute("isThereNextPage", false);
         request.getRequestDispatcher("WEB-INF/jsp/all-matches-view.jsp").forward(request, response);
     }
 }

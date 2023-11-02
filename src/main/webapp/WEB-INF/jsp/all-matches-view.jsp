@@ -13,5 +13,11 @@
         <li>${match}</li>
     </c:forEach>
 </ul>
+<br>
+<c:if test="${isThereNextPage}">
+    <form method="post" action="/matches">
+        <button type="submit" name="page" value="1">next</button>
+</form>
+</c:if>
 </body>
 </html>

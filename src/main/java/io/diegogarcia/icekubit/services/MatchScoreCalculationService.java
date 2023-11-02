@@ -10,10 +10,11 @@ public class MatchScoreCalculationService {
             instance = new MatchScoreCalculationService();
         return instance;
     }
-    public void addPoint(Match match, int playerId) {
+    public boolean addPoint(Match match, int playerId) {
         if (match.getFirstPlayerId() == playerId)
             match.getScore().addFirstPlayerPoints();
         else
             match.getScore().addSecondPlayerPoints();
+        return match.getScore().isFinished();
     }
 }

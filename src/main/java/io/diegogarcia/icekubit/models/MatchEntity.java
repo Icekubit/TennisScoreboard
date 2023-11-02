@@ -25,6 +25,12 @@ public class MatchEntity {
     public MatchEntity() {
     }
 
+    public MatchEntity(Player player1, Player player2, Player winner) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.winner = winner;
+    }
+
     public int getId() {
         return id;
     }

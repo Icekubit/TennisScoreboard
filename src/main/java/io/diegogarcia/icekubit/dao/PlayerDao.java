@@ -90,4 +90,14 @@ public class PlayerDao {
 
         return player;
     }
+
+    public void save(Player player) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.persist(player);
+
+        transaction.commit();
+        session.close();
+    }
 }

@@ -5,6 +5,8 @@ import io.diegogarcia.icekubit.models.Match;
 import io.diegogarcia.icekubit.models.MatchEntity;
 import io.diegogarcia.icekubit.models.Player;
 
+import java.util.List;
+
 public class FinishedMatchesPersistenceService {
     private static FinishedMatchesPersistenceService instance;
     private FinishedMatchesPersistenceService() {}
@@ -22,5 +24,9 @@ public class FinishedMatchesPersistenceService {
         matchEntity.setWinner(PlayerService.getInstance().getPlayerById(winnerId));
         MatchesDao.getInstance().save(matchEntity);
         System.out.println(MatchesDao.getInstance().findAll());
+    }
+
+    public List<Match> findAll() {
+        return MatchesDao.getInstance().findAll();
     }
 }

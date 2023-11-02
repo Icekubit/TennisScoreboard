@@ -50,7 +50,7 @@ public class MatchScoreServlet extends HttpServlet {
                 winner = request.getParameter("secondPlayer");
             request.setAttribute("winner", winner);
             FinishedMatchesPersistenceService.getInstance().save(match);
-            OngoingMatchesService.getInstance().deleteMatch(UUID.fromString(matchId));
+//            OngoingMatchesService.getInstance().deleteMatch(UUID.fromString(matchId));
             request.getRequestDispatcher("WEB-INF/jsp/match-result.jsp").forward(request, response);
         }
     }

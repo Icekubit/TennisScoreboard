@@ -8,6 +8,6 @@
     <br>
     <a href="/match-score">Match score</a>
     <br>
-    <a href="/matches">Matches</a>
+    <a href="/matches?page=1">Matches</a>
 </body>
 </html>

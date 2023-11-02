@@ -26,7 +26,7 @@ public class FinishedMatchesPersistenceService {
         System.out.println(MatchesDao.getInstance().findAll());
     }
 
-    public List<Match> findAll() {
+    public List<MatchEntity> findAll() {
         return MatchesDao.getInstance().findAll();
     }
 }

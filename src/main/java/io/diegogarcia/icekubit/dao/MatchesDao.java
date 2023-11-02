@@ -33,13 +33,30 @@ public class MatchesDao {
         session.close();
     }
 
-    public List<Match> findAll() {
+    public List<MatchEntity> findAll() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         String hql = "FROM MatchEntity";
         Query query = session.createQuery(hql);
-        List<Match> matches = query.getResultList();
+        List<MatchEntity> matches = query.getResultList();
+
+        transaction.commit();
+
+        session.close();
+
+        return matches;
+    }
+
+    public List<MatchEntity> getMatchesForOnePage(int pageNumber, int pageSize) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "FROM MatchEntity";
+        Query query = session.createQuery(hql);
+        query.setFirstResult((pageNumber - 1) * pageSize + 1);
+        query.setMaxResults(pageSize);
+        List<MatchEntity> matches = query.getResultList();
 
         transaction.commit();
 

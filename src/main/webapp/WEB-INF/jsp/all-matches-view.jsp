@@ -15,8 +15,7 @@
 </ul>
 <br>
 <c:if test="${isThereNextPage}">
-    <form method="post" action="/matches">
-        <button type="submit" name="page" value="1">next</button>
+    <a href="/matches?page=${page}">next</a>
 </form>
 </c:if>
 </body>

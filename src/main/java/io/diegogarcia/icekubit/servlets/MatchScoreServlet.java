@@ -36,7 +36,8 @@ public class MatchScoreServlet extends HttpServlet {
         int playerId = Integer.valueOf(request.getParameter("id"));
         request.setAttribute("matchId", matchId);
         Match match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
-        boolean isFinished = MatchScoreCalculationService.getInstance().addPoint(match, playerId);
+        MatchScoreCalculationService.getInstance().handlePoint(match, playerId);
+        boolean isFinished = MatchScoreCalculationService.getInstance().isFinished(match);
         request.setAttribute("match", match);
         request.setAttribute("firstPlayer", request.getParameter("firstPlayer"));
         request.setAttribute("secondPlayer", request.getParameter("secondPlayer"));

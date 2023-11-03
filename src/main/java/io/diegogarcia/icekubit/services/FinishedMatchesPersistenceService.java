@@ -23,7 +23,6 @@ public class FinishedMatchesPersistenceService {
         int winnerId = match.getScore().getWinningSetsOfFirstPlayer() == 2 ? match.getFirstPlayerId() : match.getSecondPlayerId();
         matchEntity.setWinner(PlayerService.getInstance().getPlayerById(winnerId));
         MatchesDao.getInstance().save(matchEntity);
-        System.out.println(MatchesDao.getInstance().findAll());
     }
 
     public List<MatchEntity> findAll() {

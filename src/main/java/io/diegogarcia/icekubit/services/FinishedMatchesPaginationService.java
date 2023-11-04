@@ -18,4 +18,9 @@ public class FinishedMatchesPaginationService {
     public List<MatchEntity> getMatchesForOnePage(int pageNumber) {
         return MatchesDao.getInstance().getMatchesForOnePage(pageNumber, PAGE_SIZE);
     }
+
+    public boolean isThereNextPage(int currentPage) {
+        int count = MatchesDao.getInstance().getMatchesCount().intValue();
+        return count - currentPage * PAGE_SIZE >= 0;
+    }
 }

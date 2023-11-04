@@ -14,9 +14,12 @@
     </c:forEach>
 </ul>
 <br>
+<c:if test="${isTherePreviousPage}">
+    <a href="/matches?page=${previousPage}">previous</a>
+</c:if>
+<br>
 <c:if test="${isThereNextPage}">
-    <a href="/matches?page=${page}">next</a>
-</form>
+    <a href="/matches?page=${nextPage}">next</a>
 </c:if>
 </body>
 </html>

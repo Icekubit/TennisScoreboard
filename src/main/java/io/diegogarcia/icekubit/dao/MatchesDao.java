@@ -64,4 +64,17 @@ public class MatchesDao {
 
         return matches;
     }
+
+    public Long getMatchesCount() {
+        Long count = 0L;
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            String hql = "SELECT COUNT(*) FROM MatchEntity";
+            Query query = session.createQuery(hql, Integer.class);
+            count = (Long) query.getSingleResult();
+            transaction.commit();
+        }
+        return count;
+    }
 }

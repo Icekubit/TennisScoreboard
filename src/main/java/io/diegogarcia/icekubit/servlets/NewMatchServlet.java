@@ -18,14 +18,16 @@ public class NewMatchServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String nameOfPlayer1 = req.getParameter("player1");
-        String nameOfPlayer2 = req.getParameter("player2");
-
-        UUID matchId = OngoingMatchesService.getInstance().addMatch(nameOfPlayer1, nameOfPlayer2);
-
-        String redirectUrl = "/match-score?uuid=" + matchId;
-
-        resp.sendRedirect(redirectUrl);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String nameOfPlayer1 = request.getParameter("player1");
+        String nameOfPlayer2 = request.getParameter("player2");
+        if (nameOfPlayer1.equals(nameOfPlayer2)) {
+            request.setAttribute("isTheSameNames", true);
+            request.getRequestDispatcher("WEB-INF/jsp/new_match.jsp").forward(request, response);
+        } else {
+            UUID matchId = OngoingMatchesService.getInstance().addMatch(nameOfPlayer1, nameOfPlayer2);
+            String redirectUrl = "/match-score?uuid=" + matchId;
+            response.sendRedirect(redirectUrl);
+        }
     }
 }

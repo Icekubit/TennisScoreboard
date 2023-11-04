@@ -15,12 +15,20 @@ public class FinishedMatchesPaginationService {
         return instance;
     }
 
-    public List<MatchEntity> getMatchesForOnePage(int pageNumber) {
-        return MatchesDao.getInstance().getMatchesForOnePage(pageNumber, PAGE_SIZE);
+    public List<MatchEntity> getMatchesForOnePage(int pageNumber, String searchName) {
+        if (searchName == null)
+            return MatchesDao.getInstance().getMatchesForOnePage(pageNumber, PAGE_SIZE);
+        else
+            return MatchesDao.getInstance().getMatchesForOnePageWithNameFilter(pageNumber, PAGE_SIZE, searchName);
     }
 
-    public boolean isThereNextPage(int currentPage) {
-        int count = MatchesDao.getInstance().getMatchesCount().intValue();
-        return count - currentPage * PAGE_SIZE >= 0;
+    public boolean isThereNextPage(int currentPage, String searchName) {
+        int count;
+        if (searchName == null)
+            count = MatchesDao.getInstance().getAllMatchesCount().intValue();
+        else
+            count = MatchesDao.getInstance().getMatchesCountForPlayer(searchName).intValue();
+        System.out.println(count);
+        return count - currentPage * PAGE_SIZE > 0;
     }
 }

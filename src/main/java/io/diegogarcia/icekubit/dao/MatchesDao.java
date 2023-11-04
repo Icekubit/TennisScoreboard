@@ -54,7 +54,7 @@ public class MatchesDao {
 
         String hql = "FROM MatchEntity";
         Query query = session.createQuery(hql);
-        query.setFirstResult((pageNumber - 1) * pageSize + 1);
+        query.setFirstResult((pageNumber - 1) * pageSize);
         query.setMaxResults(pageSize);
         List<MatchEntity> matches = query.getResultList();
 
@@ -65,7 +65,7 @@ public class MatchesDao {
         return matches;
     }
 
-    public Long getMatchesCount() {
+    public Long getAllMatchesCount() {
         Long count = 0L;
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -77,4 +77,46 @@ public class MatchesDao {
         }
         return count;
     }
+
+    public Long getMatchesCountForPlayer(String searchName) {
+        Long count = 0L;
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            String hql = "SELECT COUNT(DISTINCT m.id) FROM MatchEntity m "
+                    + "JOIN m.player1 p1 "
+                    + "JOIN m.player2 p2 "
+                    + "WHERE p1.name = :name "
+                    + "OR p2.name = :name";
+            Query query = session.createQuery(hql, Integer.class);
+            query.setParameter("name", searchName);
+            count = (Long) query.getSingleResult();
+            transaction.commit();
+        }
+        return count;
+    }
+
+    public List<MatchEntity> getMatchesForOnePageWithNameFilter(int pageNumber, int pageSize, String searchName) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "SELECT DISTINCT m FROM MatchEntity m "
+                + "JOIN m.player1 "
+                + "JOIN m.player2 "
+                + "WHERE m.player1.name = :name "
+                + "OR m.player2.name = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", searchName);
+        query.setFirstResult((pageNumber - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        List<MatchEntity> matches = query.getResultList();
+
+        transaction.commit();
+
+        session.close();
+
+        return matches;
+    }
+
+
 }

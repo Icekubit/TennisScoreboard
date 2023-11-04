@@ -14,19 +14,18 @@ import java.io.IOException;
 public class MatchesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int currentPage = Integer.valueOf(request.getParameter("page"));
-        request.setAttribute("allMatches", FinishedMatchesPaginationService.getInstance().getMatchesForOnePage(currentPage));
+        String searchName = request.getParameter("filter_by_player_name");
+        String StringCurrentPage = request.getParameter("page");
+        int currentPage;
+        if (StringCurrentPage == null)
+            currentPage = 1;
+        else
+            currentPage = Integer.valueOf(StringCurrentPage);
+        request.setAttribute("allMatches", FinishedMatchesPaginationService.getInstance().getMatchesForOnePage(currentPage, searchName));
         request.setAttribute("isTherePreviousPage", currentPage - 1 > 0);
-        request.setAttribute("isThereNextPage", FinishedMatchesPaginationService.getInstance().isThereNextPage(currentPage));
+        request.setAttribute("isThereNextPage", FinishedMatchesPaginationService.getInstance().isThereNextPage(currentPage, searchName));
         request.setAttribute("nextPage", currentPage + 1);
         request.setAttribute("previousPage", currentPage - 1);
         request.getRequestDispatcher("WEB-INF/jsp/all-matches-view.jsp").forward(request, response);
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.setAttribute("allMatches", FinishedMatchesPersistenceService.getInstance().findAll());
-//        request.setAttribute("isThereNextPage", false);
-//        request.getRequestDispatcher("WEB-INF/jsp/all-matches-view.jsp").forward(request, response);
-//    }
 }

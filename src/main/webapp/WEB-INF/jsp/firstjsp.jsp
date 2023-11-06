@@ -7,5 +7,6 @@
     <a href="/new-match">New match</a>
     <br>
     <a href="/matches">Matches</a>
+<p>Hello world</p>
 </body>
 </html>

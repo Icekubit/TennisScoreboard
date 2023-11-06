@@ -1,0 +1,85 @@
+.top-menu {
+    background-color: #333;
+    color: #fff;
+    width: 50%;
+    height: 7%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.top-menu a {
+    width: 100%;
+}
+
+
+.top-menu a button, .button-container button {
+    border: none;
+    background: #44294d;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 16px;
+    transition: background-color 0.3s; /* Добавляем плавное изменение цвета при ховере */
+    outline: none; /* Убираем внешнюю рамку при фокусировке (например, при клике) */
+}
+
+.top-menu button:hover, .button-container button:hover {
+    background-color: royalblue; /* Изменяем цвет фона при наведении (hover) */
+}
+
+body {
+    background: indianred;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #44294d;
+    margin-top: 10%;
+}
+
+
+table {
+    table-layout: fixed;
+    color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+}
+td, th {
+    border: 1px solid white;
+}
+tbody td {
+    text-align: center;
+}
+tbody th {
+    color: #44294d;
+}
+
+tfoot th {
+    text-align: right;
+}
+
+.button-container {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-left {
+    text-align: left;
+    width: 30%;
+}
+
+.button-right {
+    text-align: right;
+    width: 30%;
+}
+
+button {
+    width: 100%;
+}

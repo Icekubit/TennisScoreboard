@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+    background-image: radial-gradient(circle, #23c3c9 50%, #94b7c0);
+}
+
+/* Top-menu */
+
+.top-menu {
+    background-color: royalblue;
+}
+
+.top-menu-link {
+    width: 10%;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    color: black;
+}
+
+.top-menu-link:hover {
+    background-color: #d9a7a7;
+}
+
+/* Page-content */
+
+.page-content-title {
+    text-align: center;
+}
+
+.start-page-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.start-page-link:hover {
+    text-decoration: underline;
+}
+

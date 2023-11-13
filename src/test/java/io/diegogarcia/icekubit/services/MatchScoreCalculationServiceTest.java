@@ -15,7 +15,7 @@ public class MatchScoreCalculationServiceTest {
     @BeforeEach
     public void setUp() {
         matchScoreCalculationService = MatchScoreCalculationService.getInstance();
-        match = new CurrentMatch(1, 2);
+        match = new CurrentMatch("1", "2");
     }
     @Test
     void testNotEndingOfGameAfterAddingPointAfterScoreInGame4040() {

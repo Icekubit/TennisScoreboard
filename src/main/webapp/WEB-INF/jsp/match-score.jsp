@@ -44,14 +44,14 @@
                     <form method="post" action="/match-score?uuid=${matchId}">
                         <input type="hidden" name="firstPlayer" value="${firstPlayer}">
                         <input type="hidden" name="secondPlayer" value="${secondPlayer}">
-                        <button type="submit" name="id" value="${match.getFirstPlayerId()}">Player 1 wins point</button>
+                        <button type="submit" name="pointHandler" value="firstPlayer">Player 1 wins point</button>
                     </form>
                 </div>
                 <div class="player-two-button">
                     <form method="post" action="/match-score?uuid=${matchId}">
                         <input type="hidden" name="firstPlayer" value="${firstPlayer}">
                         <input type="hidden" name="secondPlayer" value="${secondPlayer}">
-                        <button type="submit" name="id" value="${match.getSecondPlayerId()}">Player 2 wins point</button>
+                        <button type="submit" name="pointHandler" value="secondPlayer">Player 2 wins point</button>
                     </form>
                 </div>
             </div>

@@ -21,20 +21,25 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
         CurrentMatch match = OngoingMatchesService.getInstance().getMatch(matchId);
-        Score score = match.getScore();
         request.setAttribute("match", match);
         request.setAttribute("matchId", matchId);
-        request.setAttribute("firstPlayer", PlayerService.getInstance().getPlayerById(match.getFirstPlayerId()).getName());
-        request.setAttribute("secondPlayer", PlayerService.getInstance().getPlayerById(match.getSecondPlayerId()).getName());
-        System.out.println(score);
+        request.setAttribute("firstPlayer", match.getFirstPlayerName());
+        request.setAttribute("secondPlayer", match.getSecondPlayerName());
         request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String matchId = request.getParameter("uuid");
-        int playerId = Integer.valueOf(request.getParameter("id"));
+        int playerId;
+
+        if (request.getParameter("pointHandler").equals("firstPlayer"))
+            playerId = 1;
+        else
+            playerId = 2;
+
         request.setAttribute("matchId", matchId);
+
         CurrentMatch match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
         MatchScoreCalculationService.getInstance().handlePoint(match, playerId);
         boolean isFinished = MatchScoreCalculationService.getInstance().isFinished(match);
@@ -45,7 +50,7 @@ public class MatchScoreServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
         else {
             String winner;
-            if (playerId == match.getFirstPlayerId())
+            if (playerId == 1)
                 winner = request.getParameter("firstPlayer");
             else
                 winner = request.getParameter("secondPlayer");

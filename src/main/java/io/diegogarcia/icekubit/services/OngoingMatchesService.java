@@ -16,12 +16,11 @@ public class OngoingMatchesService {
         return instance;
     }
 
-    public UUID addMatch(String firstPlayerName, String secondPlayerName) {
-        int firstPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(firstPlayerName).getId();
-        int secondPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(secondPlayerName).getId();
+    public UUID CreateCurrentMatch(String firstPlayerName, String secondPlayerName) {
+//        int firstPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(firstPlayerName).getId();
+//        int secondPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(secondPlayerName).getId();
         UUID matchId = UUID.randomUUID();
-        ongoingMatches.put(matchId, new CurrentMatch(firstPlayerId, secondPlayerId));
-        System.out.println(matchId);
+        ongoingMatches.put(matchId, new CurrentMatch(firstPlayerName, secondPlayerName));
         return matchId;
     }
 

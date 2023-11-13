@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
+// TODO подумать над редиректом при создании нового матча, стрёмно смотрится: String redirectUrl = "/match-score?uuid=" + matchId;
+
 @WebServlet(urlPatterns = "/new-match")
 public class NewMatchServlet extends HttpServlet {
 
@@ -25,7 +27,7 @@ public class NewMatchServlet extends HttpServlet {
             request.setAttribute("isTheSameNames", true);
             request.getRequestDispatcher("WEB-INF/jsp/new_match.jsp").forward(request, response);
         } else {
-            UUID matchId = OngoingMatchesService.getInstance().addMatch(nameOfPlayer1, nameOfPlayer2);
+            UUID matchId = OngoingMatchesService.getInstance().CreateCurrentMatch(nameOfPlayer1, nameOfPlayer2);
             String redirectUrl = "/match-score?uuid=" + matchId;
             response.sendRedirect(redirectUrl);
         }

@@ -1,30 +1,30 @@
 package io.diegogarcia.icekubit.models;
 
 public class CurrentMatch {
-    private int firstPlayerId;
-    private int secondPlayerId;
+    private String firstPlayerName;
+    private String secondPlayerName;
     private Score score;
 
-    public CurrentMatch(int firstPlayerId, int secondPlayerId) {
-        this.firstPlayerId = firstPlayerId;
-        this.secondPlayerId = secondPlayerId;
+    public CurrentMatch(String firstPlayerName, String secondPlayerName) {
+        this.firstPlayerName = firstPlayerName;
+        this.secondPlayerName = secondPlayerName;
         score = new Score();
     }
 
-    public int getFirstPlayerId() {
-        return firstPlayerId;
+    public String getFirstPlayerName() {
+        return firstPlayerName;
     }
 
-    public void setFirstPlayerId(int firstPlayerId) {
-        this.firstPlayerId = firstPlayerId;
+    public void setFirstPlayerName(String firstPlayerName) {
+        this.firstPlayerName = firstPlayerName;
     }
 
-    public int getSecondPlayerId() {
-        return secondPlayerId;
+    public String getSecondPlayerName() {
+        return secondPlayerName;
     }
 
-    public void setSecondPlayerId(int secondPlayerId) {
-        this.secondPlayerId = secondPlayerId;
+    public void setSecondPlayerName(String secondPlayerName) {
+        this.secondPlayerName = secondPlayerName;
     }
 
     public Score getScore() {

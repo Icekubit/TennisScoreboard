@@ -14,7 +14,7 @@
             <a class="top-menu-link" href="/matches">MATCHES</a>
         </div>
         <div class="page-content">
-            <h1>Match finished! ${firstPlayer} wins!</h1>
+            <h1>Match finished! ${winner} wins!</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -24,11 +24,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${firstPlayer}</td>
+                        <td>${match.getFirstPlayerName()}</td>
                         <td>${match.getScore().winningSetsOfFirstPlayer}</td>
                     </tr>
                     <tr>
-                        <td>${secondPlayer}</td>
+                        <td>${match.getSecondPlayerName()}</td>
                         <td>${match.getScore().winningSetsOfSecondPlayer}</td>
                     </tr>
                 </tbody>

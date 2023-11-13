@@ -22,9 +22,6 @@ public class MatchScoreServlet extends HttpServlet {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
         CurrentMatch match = OngoingMatchesService.getInstance().getMatch(matchId);
         request.setAttribute("match", match);
-        request.setAttribute("matchId", matchId);
-        request.setAttribute("firstPlayer", match.getFirstPlayerName());
-        request.setAttribute("secondPlayer", match.getSecondPlayerName());
         request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
     }
 
@@ -37,23 +34,18 @@ public class MatchScoreServlet extends HttpServlet {
             playerId = 1;
         else
             playerId = 2;
-
-        request.setAttribute("matchId", matchId);
-
         CurrentMatch match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
         MatchScoreCalculationService.getInstance().handlePoint(match, playerId);
         boolean isFinished = MatchScoreCalculationService.getInstance().isFinished(match);
         request.setAttribute("match", match);
-        request.setAttribute("firstPlayer", request.getParameter("firstPlayer"));
-        request.setAttribute("secondPlayer", request.getParameter("secondPlayer"));
         if (!isFinished)
             request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
         else {
             String winner;
             if (playerId == 1)
-                winner = request.getParameter("firstPlayer");
+                winner = match.getFirstPlayerName();
             else
-                winner = request.getParameter("secondPlayer");
+                winner = match.getSecondPlayerName();
             request.setAttribute("winner", winner);
             FinishedMatchesPersistenceService.getInstance().save(match);
             request.getRequestDispatcher("WEB-INF/jsp/match-result.jsp").forward(request, response);

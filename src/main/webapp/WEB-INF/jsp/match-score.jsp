@@ -27,33 +27,23 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${firstPlayer}</td>
+                            <td>${match.getFirstPlayerName()}</td>
                             <td>${match.getScore().winningSetsOfFirstPlayer}</td>
                             <td>${match.getScore().winningGamesOfFirstPlayer}</td>
                             <td>${match.getScore().pointsOfFirstPlayer}</td>
                         </tr>
                         <tr>
-                            <td>${secondPlayer}</td>
+                            <td>${match.getSecondPlayerName()}</td>
                             <td>${match.getScore().winningSetsOfSecondPlayer}</td>
                             <td>${match.getScore().winningGamesOfSecondPlayer}</td>
                             <td>${match.getScore().pointsOfSecondPlayer}</td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="player-one-button">
-                    <form method="post" action="/match-score?uuid=${matchId}">
-                        <input type="hidden" name="firstPlayer" value="${firstPlayer}">
-                        <input type="hidden" name="secondPlayer" value="${secondPlayer}">
-                        <button type="submit" name="pointHandler" value="firstPlayer">Player 1 wins point</button>
-                    </form>
-                </div>
-                <div class="player-two-button">
-                    <form method="post" action="/match-score?uuid=${matchId}">
-                        <input type="hidden" name="firstPlayer" value="${firstPlayer}">
-                        <input type="hidden" name="secondPlayer" value="${secondPlayer}">
-                        <button type="submit" name="pointHandler" value="secondPlayer">Player 2 wins point</button>
-                    </form>
-                </div>
+                <form method="post" action="/match-score?uuid=${param.uuid}">
+                    <button class="player-one-button" type="submit" name="pointHandler" value="firstPlayer">Player 1 wins point</button>
+                    <button class="player-two-button" type="submit" name="pointHandler" value="secondPlayer">Player 2 wins point</button>
+                </form>
             </div>
         </div>
     </body>

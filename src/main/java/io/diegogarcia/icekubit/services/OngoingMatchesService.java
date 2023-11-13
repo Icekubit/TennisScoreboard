@@ -1,6 +1,6 @@
 package io.diegogarcia.icekubit.services;
 
-import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.CurrentMatch;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class OngoingMatchesService {
     private static OngoingMatchesService instance;
-    private Map<UUID, Match> ongoingMatches = new HashMap<>();
+    private Map<UUID, CurrentMatch> ongoingMatches = new HashMap<>();
     private OngoingMatchesService() {}
     public static OngoingMatchesService getInstance() {
         if (instance == null)
@@ -20,12 +20,12 @@ public class OngoingMatchesService {
         int firstPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(firstPlayerName).getId();
         int secondPlayerId = PlayerService.getInstance().getPlayerByNameOrCreate(secondPlayerName).getId();
         UUID matchId = UUID.randomUUID();
-        ongoingMatches.put(matchId, new Match(firstPlayerId, secondPlayerId));
+        ongoingMatches.put(matchId, new CurrentMatch(firstPlayerId, secondPlayerId));
         System.out.println(matchId);
         return matchId;
     }
 
-    public Match getMatch(UUID matchId) {
+    public CurrentMatch getMatch(UUID matchId) {
         return ongoingMatches.get(matchId);
     }
     public void deleteMatch(UUID matchId) {

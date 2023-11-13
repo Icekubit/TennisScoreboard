@@ -1,6 +1,6 @@
 package io.diegogarcia.icekubit.services;
 
-import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.CurrentMatch;
 
 public class MatchScoreCalculationService {
     private static MatchScoreCalculationService instance;
@@ -19,19 +19,19 @@ public class MatchScoreCalculationService {
 
 
 
-    public void handlePoint(Match match, int playerId) {
+    public void handlePoint(CurrentMatch match, int playerId) {
         if (!match.getScore().isTieBreak())
             addPointsToPlayer(match, playerId);
         else
             addTieBreakPointToPlayer(match, playerId);
     }
 
-    public boolean isFinished(Match match) {
+    public boolean isFinished(CurrentMatch match) {
         return match.getScore().getWinningSetsOfFirstPlayer() == 2
                 || match.getScore().getWinningSetsOfSecondPlayer() == 2;
     }
 
-    private void addPointsToPlayer(Match match, int playerId) {
+    private void addPointsToPlayer(CurrentMatch match, int playerId) {
         String playerPoints, opponentPoints;
         if (match.getFirstPlayerId() == playerId) {
             playerPoints = match.getScore().getPointsOfFirstPlayer();
@@ -79,7 +79,7 @@ public class MatchScoreCalculationService {
         }
     }
 
-    private void addTieBreakPointToPlayer(Match match, int playerId) {
+    private void addTieBreakPointToPlayer(CurrentMatch match, int playerId) {
         int playerTieBreakPoints, opponentTieBreakPoints;
         if (match.getFirstPlayerId() == playerId) {
             playerTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfFirstPlayer());
@@ -106,7 +106,7 @@ public class MatchScoreCalculationService {
         }
     }
 
-    private void addGamesToPlayer(Match match, int playerId) {
+    private void addGamesToPlayer(CurrentMatch match, int playerId) {
         int playerGames, opponentGames;
         if (match.getFirstPlayerId() == playerId) {
             playerGames = match.getScore().getWinningGamesOfFirstPlayer();
@@ -130,7 +130,7 @@ public class MatchScoreCalculationService {
         }
     }
 
-    private void addSetToPlayer(Match match, int playerId) {
+    private void addSetToPlayer(CurrentMatch match, int playerId) {
         if (match.getFirstPlayerId() == playerId) {
             int sets = match.getScore().getWinningSetsOfFirstPlayer() + 1;
             match.getScore().setWinningSetsOfFirstPlayer(sets);
@@ -145,7 +145,7 @@ public class MatchScoreCalculationService {
         match.getScore().setTieBreak(false);
     }
 
-    private void startTieBreak(Match match) {
+    private void startTieBreak(CurrentMatch match) {
         match.getScore().setWinningGamesOfFirstPlayer(6);
         match.getScore().setWinningGamesOfSecondPlayer(6);
         match.getScore().setPointsOfFirstPlayer("0");

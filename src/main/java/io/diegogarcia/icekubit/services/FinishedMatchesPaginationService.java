@@ -1,7 +1,7 @@
 package io.diegogarcia.icekubit.services;
 
 import io.diegogarcia.icekubit.dao.MatchesDao;
-import io.diegogarcia.icekubit.models.MatchEntity;
+import io.diegogarcia.icekubit.models.Match;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class FinishedMatchesPaginationService {
         return instance;
     }
 
-    public List<MatchEntity> getMatchesForOnePage(int pageNumber, String searchName) {
+    public List<Match> getMatchesForOnePage(int pageNumber, String searchName) {
         if (searchName == null)
             return MatchesDao.getInstance().getMatchesForOnePage(pageNumber, PAGE_SIZE);
         else

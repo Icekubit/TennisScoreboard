@@ -1,6 +1,6 @@
 package io.diegogarcia.icekubit.servlets;
 
-import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.CurrentMatch;
 import io.diegogarcia.icekubit.models.Score;
 import io.diegogarcia.icekubit.services.FinishedMatchesPersistenceService;
 import io.diegogarcia.icekubit.services.MatchScoreCalculationService;
@@ -20,7 +20,7 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
-        Match match = OngoingMatchesService.getInstance().getMatch(matchId);
+        CurrentMatch match = OngoingMatchesService.getInstance().getMatch(matchId);
         Score score = match.getScore();
         request.setAttribute("match", match);
         request.setAttribute("matchId", matchId);
@@ -35,7 +35,7 @@ public class MatchScoreServlet extends HttpServlet {
         String matchId = request.getParameter("uuid");
         int playerId = Integer.valueOf(request.getParameter("id"));
         request.setAttribute("matchId", matchId);
-        Match match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
+        CurrentMatch match = OngoingMatchesService.getInstance().getMatch(UUID.fromString(matchId));
         MatchScoreCalculationService.getInstance().handlePoint(match, playerId);
         boolean isFinished = MatchScoreCalculationService.getInstance().isFinished(match);
         request.setAttribute("match", match);

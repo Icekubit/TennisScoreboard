@@ -1,9 +1,8 @@
 package io.diegogarcia.icekubit.services;
 
 import io.diegogarcia.icekubit.dao.MatchesDao;
+import io.diegogarcia.icekubit.models.CurrentMatch;
 import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.MatchEntity;
-import io.diegogarcia.icekubit.models.Player;
 
 import java.util.List;
 
@@ -16,8 +15,8 @@ public class FinishedMatchesPersistenceService {
         return instance;
     }
 
-    public void save(Match match) {
-        MatchEntity matchEntity = new MatchEntity();
+    public void save(CurrentMatch match) {
+        Match matchEntity = new Match();
         matchEntity.setPlayer1(PlayerService.getInstance().getPlayerById(match.getFirstPlayerId()));
         matchEntity.setPlayer2(PlayerService.getInstance().getPlayerById(match.getSecondPlayerId()));
         int winnerId = match.getScore().getWinningSetsOfFirstPlayer() == 2 ? match.getFirstPlayerId() : match.getSecondPlayerId();
@@ -25,7 +24,7 @@ public class FinishedMatchesPersistenceService {
         MatchesDao.getInstance().save(matchEntity);
     }
 
-    public List<MatchEntity> findAll() {
+    public List<Match> findAll() {
         return MatchesDao.getInstance().findAll();
     }
 }

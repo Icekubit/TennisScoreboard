@@ -1,6 +1,6 @@
 package io.diegogarcia.icekubit.services;
 
-import io.diegogarcia.icekubit.models.Match;
+import io.diegogarcia.icekubit.models.CurrentMatch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MatchScoreCalculationServiceTest {
 
     private MatchScoreCalculationService matchScoreCalculationService;
-    private Match match;
+    private CurrentMatch match;
 
     @BeforeEach
     public void setUp() {
         matchScoreCalculationService = MatchScoreCalculationService.getInstance();
-        match = new Match(1, 2);
+        match = new CurrentMatch(1, 2);
     }
     @Test
     void testNotEndingOfGameAfterAddingPointAfterScoreInGame4040() {

@@ -1,8 +1,6 @@
 package io.diegogarcia.icekubit.dao;
 
 import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.MatchEntity;
-import io.diegogarcia.icekubit.models.Player;
 import io.diegogarcia.icekubit.utils.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
@@ -21,7 +19,7 @@ public class MatchesDao {
         return instance;
     }
 
-    public void save(MatchEntity matchEntity) {
+    public void save(Match matchEntity) {
 
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -33,13 +31,13 @@ public class MatchesDao {
         session.close();
     }
 
-    public List<MatchEntity> findAll() {
+    public List<Match> findAll() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "FROM MatchEntity";
+        String hql = "FROM Match";
         Query query = session.createQuery(hql);
-        List<MatchEntity> matches = query.getResultList();
+        List<Match> matches = query.getResultList();
 
         transaction.commit();
 
@@ -48,15 +46,15 @@ public class MatchesDao {
         return matches;
     }
 
-    public List<MatchEntity> getMatchesForOnePage(int pageNumber, int pageSize) {
+    public List<Match> getMatchesForOnePage(int pageNumber, int pageSize) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "FROM MatchEntity";
+        String hql = "FROM Match";
         Query query = session.createQuery(hql);
         query.setFirstResult((pageNumber - 1) * pageSize);
         query.setMaxResults(pageSize);
-        List<MatchEntity> matches = query.getResultList();
+        List<Match> matches = query.getResultList();
 
         transaction.commit();
 
@@ -70,7 +68,7 @@ public class MatchesDao {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            String hql = "SELECT COUNT(*) FROM MatchEntity";
+            String hql = "SELECT COUNT(*) FROM Match";
             Query query = session.createQuery(hql, Integer.class);
             count = (Long) query.getSingleResult();
             transaction.commit();
@@ -83,7 +81,7 @@ public class MatchesDao {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            String hql = "SELECT COUNT(DISTINCT m.id) FROM MatchEntity m "
+            String hql = "SELECT COUNT(DISTINCT m.id) FROM Match m "
                     + "JOIN m.player1 p1 "
                     + "JOIN m.player2 p2 "
                     + "WHERE p1.name = :name "
@@ -96,11 +94,11 @@ public class MatchesDao {
         return count;
     }
 
-    public List<MatchEntity> getMatchesForOnePageWithNameFilter(int pageNumber, int pageSize, String searchName) {
+    public List<Match> getMatchesForOnePageWithNameFilter(int pageNumber, int pageSize, String searchName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "SELECT DISTINCT m FROM MatchEntity m "
+        String hql = "SELECT DISTINCT m FROM Match m "
                 + "JOIN m.player1 "
                 + "JOIN m.player2 "
                 + "WHERE m.player1.name = :name "
@@ -109,7 +107,7 @@ public class MatchesDao {
         query.setParameter("name", searchName);
         query.setFirstResult((pageNumber - 1) * pageSize);
         query.setMaxResults(pageSize);
-        List<MatchEntity> matches = query.getResultList();
+        List<Match> matches = query.getResultList();
 
         transaction.commit();
 

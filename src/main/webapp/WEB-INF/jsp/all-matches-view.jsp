@@ -30,46 +30,51 @@
                     </form>
                     <a class="search-container-item-anchor" class="refresh-button" href="/matches">Refresh</a>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Player 1</th>
-                            <th>Player 2</th>
-                            <th>Winner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${allMatches}" var="match">
+                <c:if test="${empty allMatches}">
+                    <h1>No results for player with name ${param.filter_by_player_name}</h1>
+                </c:if>
+                <c:if test="${not empty allMatches}">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>${match.getId()}</td>
-                                <td>${match.getPlayer1().getName()}</td>
-                                <td>${match.getPlayer2().getName()}</td>
-                                <td>${match.getWinner().getName()}</td>
+                                <th>ID</th>
+                                <th>Player 1</th>
+                                <th>Player 2</th>
+                                <th>Winner</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <div>
-                    <c:if test="${isTherePreviousPage}">
-                        <c:if test="${not empty param.filter_by_player_name}">
-                            <c:set var="previousPageUrl" value="/matches?page=${previousPage}&filter_by_player_name=${param.filter_by_player_name}"/>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${allMatches}" var="match">
+                                <tr>
+                                    <td>${match.getId()}</td>
+                                    <td>${match.getPlayer1().getName()}</td>
+                                    <td>${match.getPlayer2().getName()}</td>
+                                    <td>${match.getWinner().getName()}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <div>
+                        <c:if test="${isTherePreviousPage}">
+                            <c:if test="${not empty param.filter_by_player_name}">
+                                <c:set var="previousPageUrl" value="/matches?page=${previousPage}&filter_by_player_name=${param.filter_by_player_name}"/>
+                            </c:if>
+                            <c:if test="${empty param.filter_by_player_name}">
+                                <c:set var="previousPageUrl" value="/matches?page=${previousPage}"/>
+                            </c:if>
+                            <a class="previous-page-link" href="${previousPageUrl}">previous</a>
                         </c:if>
-                        <c:if test="${empty param.filter_by_player_name}">
-                            <c:set var="previousPageUrl" value="/matches?page=${previousPage}"/>
+                        <c:if test="${isThereNextPage}">
+                            <c:if test="${not empty param.filter_by_player_name}">
+                                <c:set var="nextPageUrl" value="/matches?page=${nextPage}&filter_by_player_name=${param.filter_by_player_name}"/>
+                            </c:if>
+                            <c:if test="${empty param.filter_by_player_name}">
+                                <c:set var="nextPageUrl" value="/matches?page=${nextPage}"/>
+                            </c:if>
+                            <a class="next-page-link" href="${nextPageUrl}">next</a>
                         </c:if>
-                        <a class="previous-page-link" href="${previousPageUrl}">previous</a>
-                    </c:if>
-                    <c:if test="${isThereNextPage}">
-                        <c:if test="${not empty param.filter_by_player_name}">
-                            <c:set var="nextPageUrl" value="/matches?page=${nextPage}&filter_by_player_name=${param.filter_by_player_name}"/>
-                        </c:if>
-                        <c:if test="${empty param.filter_by_player_name}">
-                            <c:set var="nextPageUrl" value="/matches?page=${nextPage}"/>
-                        </c:if>
-                        <a class="next-page-link" href="${nextPageUrl}">next</a>
-                    </c:if>
-                </div>
+                    </div>
+                </c:if>
             </div>
         </div>
     </body>

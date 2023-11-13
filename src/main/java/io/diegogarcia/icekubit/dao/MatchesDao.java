@@ -1,8 +1,10 @@
 package io.diegogarcia.icekubit.dao;
 
+import io.diegogarcia.icekubit.exceptions.DatabaseException;
 import io.diegogarcia.icekubit.models.Match;
 import io.diegogarcia.icekubit.utils.HibernateUtil;
 import jakarta.persistence.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,15 +22,17 @@ public class MatchesDao {
     }
 
     public void save(Match matchEntity) {
-
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        session.persist(matchEntity);
-
-        transaction.commit();
-
-        session.close();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.persist(matchEntity);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DatabaseException(e);
+        }
     }
 
     public List<Match> findAll() {

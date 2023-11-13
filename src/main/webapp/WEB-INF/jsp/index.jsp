@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Start page</title>
-        <link rel="stylesheet" href="/css/start-page-style.css">
+        <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
         <div class="top-menu">

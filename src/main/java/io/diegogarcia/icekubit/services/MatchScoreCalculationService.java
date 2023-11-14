@@ -10,14 +10,6 @@ public class MatchScoreCalculationService {
             instance = new MatchScoreCalculationService();
         return instance;
     }
-//    public void addPoint(Match match, int playerId) {
-//        if (match.getFirstPlayerId() == playerId)
-//            match.getScore().addFirstPlayerPoints();
-//        else
-//            match.getScore().addSecondPlayerPoints();
-//    }
-
-
 
     public void handlePoint(CurrentMatch match, int playerId) {
         if (!match.getScore().isTieBreak())
@@ -33,13 +25,7 @@ public class MatchScoreCalculationService {
 
     private void addPointsToPlayer(CurrentMatch match, int playerId) {
         String playerPoints, opponentPoints;
-//        if (match.getFirstPlayerId() == playerId) {
-//            playerPoints = match.getScore().getPointsOfFirstPlayer();
-//            opponentPoints = match.getScore().getPointsOfSecondPlayer();
-//        } else {
-//            playerPoints = match.getScore().getPointsOfSecondPlayer();
-//            opponentPoints = match.getScore().getPointsOfFirstPlayer();
-//        }
+
         if (playerId == 1) {
             playerPoints = match.getScore().getPointsOfFirstPlayer();
             opponentPoints = match.getScore().getPointsOfSecondPlayer();
@@ -77,13 +63,7 @@ public class MatchScoreCalculationService {
             default:
                 throw new RuntimeException("Unhandled case");
         }
-//        if (match.getFirstPlayerId() == playerId) {
-//            match.getScore().setPointsOfFirstPlayer(playerPoints);
-//            match.getScore().setPointsOfSecondPlayer(opponentPoints);
-//        } else {
-//            match.getScore().setPointsOfSecondPlayer(playerPoints);
-//            match.getScore().setPointsOfFirstPlayer(opponentPoints);
-//        }
+
         if (playerId == 1) {
             match.getScore().setPointsOfFirstPlayer(playerPoints);
             match.getScore().setPointsOfSecondPlayer(opponentPoints);
@@ -95,19 +75,13 @@ public class MatchScoreCalculationService {
 
     private void addTieBreakPointToPlayer(CurrentMatch match, int playerId) {
         int playerTieBreakPoints, opponentTieBreakPoints;
-//        if (match.getFirstPlayerId() == playerId) {
-//            playerTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfFirstPlayer());
-//            opponentTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfSecondPlayer());
-//        } else {
-//            playerTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfSecondPlayer());
-//            opponentTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfFirstPlayer());
-//        }
+
         if (playerId == 1) {
-            playerTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfFirstPlayer());
-            opponentTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfSecondPlayer());
+            playerTieBreakPoints = Integer.parseInt(match.getScore().getPointsOfFirstPlayer());
+            opponentTieBreakPoints = Integer.parseInt(match.getScore().getPointsOfSecondPlayer());
         } else {
-            playerTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfSecondPlayer());
-            opponentTieBreakPoints = Integer.valueOf(match.getScore().getPointsOfFirstPlayer());
+            playerTieBreakPoints = Integer.parseInt(match.getScore().getPointsOfSecondPlayer());
+            opponentTieBreakPoints = Integer.parseInt(match.getScore().getPointsOfFirstPlayer());
         }
 
         if (playerTieBreakPoints < 6
@@ -115,11 +89,7 @@ public class MatchScoreCalculationService {
                 || playerTieBreakPoints >= 6 && (opponentTieBreakPoints - playerTieBreakPoints == 1)
         ) {
             playerTieBreakPoints++;
-//            if (match.getFirstPlayerId() == playerId) {
-//                match.getScore().setPointsOfFirstPlayer(Integer.toString(playerTieBreakPoints));
-//            } else {
-//                match.getScore().setPointsOfSecondPlayer(Integer.toString(playerTieBreakPoints));
-//            }
+
             if (playerId == 1) {
                 match.getScore().setPointsOfFirstPlayer(Integer.toString(playerTieBreakPoints));
             } else {
@@ -134,13 +104,7 @@ public class MatchScoreCalculationService {
 
     private void addGamesToPlayer(CurrentMatch match, int playerId) {
         int playerGames, opponentGames;
-//        if (match.getFirstPlayerId() == playerId) {
-//            playerGames = match.getScore().getWinningGamesOfFirstPlayer();
-//            opponentGames = match.getScore().getWinningGamesOfSecondPlayer();
-//        } else {
-//            playerGames = match.getScore().getWinningGamesOfSecondPlayer();
-//            opponentGames = match.getScore().getWinningGamesOfFirstPlayer();
-//        }
+
         if (playerId == 1) {
             playerGames = match.getScore().getWinningGamesOfFirstPlayer();
             opponentGames = match.getScore().getWinningGamesOfSecondPlayer();
@@ -151,11 +115,7 @@ public class MatchScoreCalculationService {
 
         if (playerGames <= 4 || playerGames == 5 && opponentGames == 5) {
             playerGames++;
-//            if (match.getFirstPlayerId() == playerId) {
-//                match.getScore().setWinningGamesOfFirstPlayer(playerGames);
-//            } else {
-//                match.getScore().setWinningGamesOfSecondPlayer(playerGames);
-//            }
+
             if (playerId == 1) {
                 match.getScore().setWinningGamesOfFirstPlayer(playerGames);
             } else {
@@ -169,13 +129,7 @@ public class MatchScoreCalculationService {
     }
 
     private void addSetToPlayer(CurrentMatch match, int playerId) {
-//        if (match.getFirstPlayerId() == playerId) {
-//            int sets = match.getScore().getWinningSetsOfFirstPlayer() + 1;
-//            match.getScore().setWinningSetsOfFirstPlayer(sets);
-//        } else {
-//            int sets = match.getScore().getWinningSetsOfSecondPlayer() + 1;
-//            match.getScore().setWinningSetsOfSecondPlayer(sets);
-//        }
+
         if (playerId == 1) {
             int sets = match.getScore().getWinningSetsOfFirstPlayer() + 1;
             match.getScore().setWinningSetsOfFirstPlayer(sets);

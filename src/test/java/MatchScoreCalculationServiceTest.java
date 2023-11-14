@@ -1,8 +1,7 @@
-package io.diegogarcia.icekubit.services;
-
-import io.diegogarcia.icekubit.models.CurrentMatch;
+import models.CurrentMatch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.MatchScoreCalculationService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

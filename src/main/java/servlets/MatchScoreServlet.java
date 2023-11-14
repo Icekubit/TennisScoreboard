@@ -1,11 +1,9 @@
-package io.diegogarcia.icekubit.servlets;
+package servlets;
 
-import io.diegogarcia.icekubit.models.CurrentMatch;
-import io.diegogarcia.icekubit.models.Score;
-import io.diegogarcia.icekubit.services.FinishedMatchesPersistenceService;
-import io.diegogarcia.icekubit.services.MatchScoreCalculationService;
-import io.diegogarcia.icekubit.services.OngoingMatchesService;
-import io.diegogarcia.icekubit.services.PlayerService;
+import models.CurrentMatch;
+import services.FinishedMatchesPersistenceService;
+import services.MatchScoreCalculationService;
+import services.OngoingMatchesService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

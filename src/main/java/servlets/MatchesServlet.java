@@ -1,7 +1,6 @@
-package io.diegogarcia.icekubit.servlets;
+package servlets;
 
-import io.diegogarcia.icekubit.services.FinishedMatchesPaginationService;
-import io.diegogarcia.icekubit.services.FinishedMatchesPersistenceService;
+import services.FinishedMatchesPaginationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

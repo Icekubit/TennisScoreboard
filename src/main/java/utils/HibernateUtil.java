@@ -1,7 +1,7 @@
-package io.diegogarcia.icekubit.utils;
+package utils;
 
-import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.Player;
+import models.Match;
+import models.Player;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

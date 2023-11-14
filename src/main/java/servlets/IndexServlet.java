@@ -1,4 +1,4 @@
-package io.diegogarcia.icekubit.servlets;
+package servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

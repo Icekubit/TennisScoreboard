@@ -1,6 +1,6 @@
-package io.diegogarcia.icekubit.services;
+package services;
 
-import io.diegogarcia.icekubit.models.CurrentMatch;
+import models.CurrentMatch;
 
 import java.util.HashMap;
 import java.util.Map;

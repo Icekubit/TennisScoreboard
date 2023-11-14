@@ -1,6 +1,6 @@
-package io.diegogarcia.icekubit.servlets;
+package servlets;
 
-import io.diegogarcia.icekubit.services.OngoingMatchesService;
+import services.OngoingMatchesService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -1,9 +1,9 @@
-package io.diegogarcia.icekubit.services;
+package services;
 
-import io.diegogarcia.icekubit.dao.MatchesDao;
-import io.diegogarcia.icekubit.models.CurrentMatch;
-import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.Player;
+import dao.MatchesDao;
+import models.CurrentMatch;
+import models.Match;
+import models.Player;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package io.diegogarcia.icekubit.listeners;
+package listeners;
 
-import io.diegogarcia.icekubit.dao.MatchesDao;
-import io.diegogarcia.icekubit.dao.PlayerDao;
-import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.models.Player;
-import io.diegogarcia.icekubit.utils.HibernateUtil;
+import dao.PlayerDao;
+import dao.MatchesDao;
+import models.Match;
+import models.Player;
+import utils.HibernateUtil;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import org.hibernate.SessionFactory;

@@ -1,4 +1,4 @@
-package io.diegogarcia.icekubit.exceptions;
+package exceptions;
 
 public class DatabaseException extends RuntimeException {
     public DatabaseException(Throwable cause) {

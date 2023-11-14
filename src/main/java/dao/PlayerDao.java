@@ -1,7 +1,7 @@
-package io.diegogarcia.icekubit.dao;
+package dao;
 
-import io.diegogarcia.icekubit.models.Player;
-import io.diegogarcia.icekubit.utils.HibernateUtil;
+import models.Player;
+import utils.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

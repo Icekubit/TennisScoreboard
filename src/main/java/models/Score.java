@@ -1,4 +1,4 @@
-package io.diegogarcia.icekubit.models;
+package models;
 
 public class Score {
     private int winningSetsOfFirstPlayer;

@@ -1,7 +1,7 @@
-package io.diegogarcia.icekubit.services;
+package services;
 
-import io.diegogarcia.icekubit.dao.PlayerDao;
-import io.diegogarcia.icekubit.models.Player;
+import dao.PlayerDao;
+import models.Player;
 
 public class PlayerService {
     private static PlayerService instance;

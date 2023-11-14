@@ -1,8 +1,8 @@
-package io.diegogarcia.icekubit.dao;
+package dao;
 
-import io.diegogarcia.icekubit.exceptions.DatabaseException;
-import io.diegogarcia.icekubit.models.Match;
-import io.diegogarcia.icekubit.utils.HibernateUtil;
+import exceptions.DatabaseException;
+import models.Match;
+import utils.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

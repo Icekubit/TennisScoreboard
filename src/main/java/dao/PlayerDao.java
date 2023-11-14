@@ -1,6 +1,8 @@
 package dao;
 
+import exceptions.DatabaseException;
 import models.Player;
+import org.hibernate.HibernateException;
 import utils.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
@@ -21,81 +23,43 @@ public class PlayerDao {
         return instance;
     }
 
-    public List<Player> findAll() {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        String hql = "FROM Player";
-        Query query = session.createQuery(hql);
-        List<Player> players = query.getResultList();
-
-        transaction.commit();
-
-        session.close();
-
-        return players;
-    }
-
 
     public Player getPlayerByNameOrCreate(String nameOfPlayer) {
         Player player = null;
+        Transaction transaction = null;
 
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-
-        String hql = "FROM Player p WHERE p.name = :name";
-        Query query = session.createQuery(hql);
-        query.setParameter("name", nameOfPlayer);
-        List<Player> result = query.getResultList();
-
-        if (!result.isEmpty()) {
-            player = result.get(0);
-        } else {
-            session.persist(new Player(nameOfPlayer));
-            player = (Player) query.getResultList().get(0);
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            String hql = "FROM Player p WHERE p.name = :name";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", nameOfPlayer);
+            List<Player> result = query.getResultList();
+            if (!result.isEmpty()) {
+                player = result.get(0);
+            } else {
+                session.persist(new Player(nameOfPlayer));
+                player = (Player) query.getResultList().get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            throw new DatabaseException(e);
         }
-
-
-
-
-        transaction.commit();
-
-        session.close();
-
         return player;
     }
 
-    public Player getPlayerById(int playerId) {
-        Player player = null;
-
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-
-        String hql = "FROM Player p WHERE p.id = :id";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", playerId);
-        player = (Player) query.getResultList().get(0);
-
-
-
-
-
-        transaction.commit();
-
-        session.close();
-
-        return player;
-    }
 
     public void save(Player player) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.persist(player);
+            session.persist(player);
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            throw new DatabaseException(e);
+        }
     }
 }

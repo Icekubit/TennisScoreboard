@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MatchesDao {
@@ -35,47 +36,30 @@ public class MatchesDao {
         }
     }
 
-    public List<Match> findAll() {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        String hql = "FROM Match";
-        Query query = session.createQuery(hql);
-        List<Match> matches = query.getResultList();
-
-        transaction.commit();
-
-        session.close();
-
-        return matches;
-    }
 
     public List<Match> getMatchesForOnePage(int pageNumber, int pageSize) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        String hql = "FROM Match";
-        Query query = session.createQuery(hql);
-        query.setFirstResult((pageNumber - 1) * pageSize);
-        query.setMaxResults(pageSize);
-        List<Match> matches = query.getResultList();
-
-        transaction.commit();
-
-        session.close();
-
+        List<Match> matches = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Match";
+            Query query = session.createQuery(hql);
+            query.setFirstResult((pageNumber - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            matches = query.getResultList();
+        } catch (HibernateException e) {
+            throw new DatabaseException(e);
+        }
         return matches;
     }
 
     public Long getAllMatchesCount() {
         Long count = 0L;
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
 
             String hql = "SELECT COUNT(*) FROM Match";
             Query query = session.createQuery(hql, Integer.class);
             count = (Long) query.getSingleResult();
-            transaction.commit();
+        } catch (HibernateException e) {
+            throw new DatabaseException(e);
         }
         return count;
     }
@@ -83,7 +67,6 @@ public class MatchesDao {
     public Long getMatchesCountForPlayer(String searchName) {
         Long count = 0L;
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
 
             String hql = "SELECT COUNT(DISTINCT m.id) FROM Match m "
                     + "JOIN m.player1 p1 "
@@ -93,29 +76,28 @@ public class MatchesDao {
             Query query = session.createQuery(hql, Integer.class);
             query.setParameter("name", searchName);
             count = (Long) query.getSingleResult();
-            transaction.commit();
+        } catch (HibernateException e) {
+            throw new DatabaseException(e);
         }
         return count;
     }
 
     public List<Match> getMatchesForOnePageWithNameFilter(int pageNumber, int pageSize, String searchName) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
-        String hql = "SELECT DISTINCT m FROM Match m "
-                + "JOIN m.player1 "
-                + "JOIN m.player2 "
-                + "WHERE m.player1.name = :name "
-                + "OR m.player2.name = :name";
-        Query query = session.createQuery(hql);
-        query.setParameter("name", searchName);
-        query.setFirstResult((pageNumber - 1) * pageSize);
-        query.setMaxResults(pageSize);
-        List<Match> matches = query.getResultList();
-
-        transaction.commit();
-
-        session.close();
+        List<Match> matches = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "SELECT DISTINCT m FROM Match m "
+                    + "JOIN m.player1 "
+                    + "JOIN m.player2 "
+                    + "WHERE m.player1.name = :name "
+                    + "OR m.player2.name = :name";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", searchName);
+            query.setFirstResult((pageNumber - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            matches = query.getResultList();
+        } catch (HibernateException e) {
+            throw new DatabaseException(e);
+        }
 
         return matches;
     }

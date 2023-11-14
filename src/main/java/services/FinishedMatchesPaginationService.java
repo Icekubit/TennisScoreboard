@@ -16,19 +16,22 @@ public class FinishedMatchesPaginationService {
     }
 
     public List<Match> getMatchesForOnePage(int pageNumber, String searchName) {
-        if (searchName == null)
+        if (searchName == null) {
             return MatchesDao.getInstance().getMatchesForOnePage(pageNumber, PAGE_SIZE);
-        else
+        }
+        else {
             return MatchesDao.getInstance().getMatchesForOnePageWithNameFilter(pageNumber, PAGE_SIZE, searchName);
+        }
     }
 
     public boolean isThereNextPage(int currentPage, String searchName) {
         int count;
-        if (searchName == null)
+        if (searchName == null) {
             count = MatchesDao.getInstance().getAllMatchesCount().intValue();
-        else
+        }
+        else {
             count = MatchesDao.getInstance().getMatchesCountForPlayer(searchName).intValue();
-        System.out.println(count);
+        }
         return count - currentPage * PAGE_SIZE > 0;
     }
 }

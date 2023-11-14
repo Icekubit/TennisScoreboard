@@ -17,7 +17,4 @@ public class PlayerService {
         return PlayerDao.getInstance().getPlayerByNameOrCreate(nameOfPlayer);
     }
 
-    public Player getPlayerById(int id) {
-        return PlayerDao.getInstance().getPlayerById(id);
-    }
 }

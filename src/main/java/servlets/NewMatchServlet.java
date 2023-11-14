@@ -10,8 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-// TODO подумать над редиректом при создании нового матча, стрёмно смотрится: String redirectUrl = "/match-score?uuid=" + matchId;
-
 @WebServlet(urlPatterns = "/new-match")
 public class NewMatchServlet extends HttpServlet {
 

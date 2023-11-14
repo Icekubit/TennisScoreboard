@@ -9,8 +9,6 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-// TODO метод getPlayerByNameOrCreate - полное говно, как будто ты уебан с курсов, переделать
-
 public class PlayerDao {
     private static PlayerDao instance;
     private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

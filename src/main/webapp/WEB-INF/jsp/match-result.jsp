@@ -25,11 +25,11 @@
                 <tbody>
                     <tr>
                         <td>${match.getFirstPlayerName()}</td>
-                        <td>${match.getScore().winningSetsOfFirstPlayer}</td>
+                        <td>${match.getWinningSetsOfFirstPlayer()}</td>
                     </tr>
                     <tr>
                         <td>${match.getSecondPlayerName()}</td>
-                        <td>${match.getScore().winningSetsOfSecondPlayer}</td>
+                        <td>${match.getWinningSetsOfSecondPlayer()}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,37 +1,17 @@
 package models;
 
+import lombok.Data;
+import services.newScore.MatchScore;
+
+@Data
 public class CurrentMatch {
     private String firstPlayerName;
     private String secondPlayerName;
-    private Score score;
+    private MatchScore matchScore;
 
     public CurrentMatch(String firstPlayerName, String secondPlayerName) {
         this.firstPlayerName = firstPlayerName;
         this.secondPlayerName = secondPlayerName;
-        score = new Score();
-    }
-
-    public String getFirstPlayerName() {
-        return firstPlayerName;
-    }
-
-    public void setFirstPlayerName(String firstPlayerName) {
-        this.firstPlayerName = firstPlayerName;
-    }
-
-    public String getSecondPlayerName() {
-        return secondPlayerName;
-    }
-
-    public void setSecondPlayerName(String secondPlayerName) {
-        this.secondPlayerName = secondPlayerName;
-    }
-
-    public Score getScore() {
-        return score;
-    }
-
-    public void setScore(Score score) {
-        this.score = score;
+        matchScore = new MatchScore();
     }
 }

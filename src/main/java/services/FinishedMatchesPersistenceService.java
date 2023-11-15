@@ -22,7 +22,7 @@ public class FinishedMatchesPersistenceService {
         Player secondPlayer = PlayerService.getInstance().getPlayerByNameOrCreate(currentMatch.getSecondPlayerName());
         match.setPlayer1(firstPlayer);
         match.setPlayer2(secondPlayer);
-        if (currentMatch.getScore().getWinningSetsOfFirstPlayer() == 2)
+        if (currentMatch.getMatchScore().getPlayerScore(0) == 2)
             match.setWinner(firstPlayer);
         else
             match.setWinner(secondPlayer);

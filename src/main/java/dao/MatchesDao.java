@@ -71,10 +71,10 @@ public class MatchesDao {
             String hql = "SELECT COUNT(DISTINCT m.id) FROM Match m "
                     + "JOIN m.player1 p1 "
                     + "JOIN m.player2 p2 "
-                    + "WHERE p1.name = :name "
-                    + "OR p2.name = :name";
+                    + "WHERE p1.name LIKE :name "
+                    + "OR p2.name LIKE :name";
             Query query = session.createQuery(hql, Integer.class);
-            query.setParameter("name", searchName);
+            query.setParameter("name", "%" + searchName + "%");
             count = (Long) query.getSingleResult();
         } catch (HibernateException e) {
             throw new DatabaseException(e);
@@ -88,10 +88,10 @@ public class MatchesDao {
             String hql = "SELECT DISTINCT m FROM Match m "
                     + "JOIN m.player1 "
                     + "JOIN m.player2 "
-                    + "WHERE m.player1.name = :name "
-                    + "OR m.player2.name = :name";
+                    + "WHERE m.player1.name LIKE :name "
+                    + "OR m.player2.name LIKE :name";
             Query query = session.createQuery(hql);
-            query.setParameter("name", searchName);
+            query.setParameter("name", "%" + searchName + "%");
             query.setFirstResult((pageNumber - 1) * pageSize);
             query.setMaxResults(pageSize);
             matches = query.getResultList();

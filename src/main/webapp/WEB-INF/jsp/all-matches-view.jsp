@@ -31,7 +31,7 @@
                     <a class="search-container-item-anchor" class="refresh-button" href="/matches">Refresh</a>
                 </div>
                 <c:if test="${empty allMatches}">
-                    <h1>No results for player with name ${param.filter_by_player_name}</h1>
+                    <h1>No results for ${param.filter_by_player_name}</h1>
                 </c:if>
                 <c:if test="${not empty allMatches}">
                     <table class="table">

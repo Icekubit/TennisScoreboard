@@ -25,6 +25,6 @@ public class MatchesServlet extends HttpServlet {
         request.setAttribute("isThereNextPage", FinishedMatchesPaginationService.getInstance().isThereNextPage(currentPage, searchName));
         request.setAttribute("nextPage", currentPage + 1);
         request.setAttribute("previousPage", currentPage - 1);
-        request.getRequestDispatcher("WEB-INF/jsp/all-matches-view.jsp").forward(request, response);
+        request.getRequestDispatcher("view/all-matches-view.jsp").forward(request, response);
     }
 }

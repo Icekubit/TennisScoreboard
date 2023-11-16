@@ -19,7 +19,7 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchId = UUID.fromString(request.getParameter("uuid"));
         request.setAttribute("match", OngoingMatchesService.getInstance().getCurrentMatchScoreDto(matchId));
-        request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
+        request.getRequestDispatcher("view/match-score.jsp").forward(request, response);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MatchScoreServlet extends HttpServlet {
         request.setAttribute("match", OngoingMatchesService.getInstance().getCurrentMatchScoreDto(matchId));
 
         if (matchState == State.ONGOING) {
-            request.getRequestDispatcher("WEB-INF/jsp/match-score.jsp").forward(request, response);
+            request.getRequestDispatcher("view/match-score.jsp").forward(request, response);
         }
         else {
             String winner;
@@ -43,7 +43,7 @@ public class MatchScoreServlet extends HttpServlet {
                 winner = match.getSecondPlayerName();
             request.setAttribute("winner", winner);
             FinishedMatchesPersistenceService.getInstance().save(match);
-            request.getRequestDispatcher("WEB-INF/jsp/match-result.jsp").forward(request, response);
+            request.getRequestDispatcher("view/match-result.jsp").forward(request, response);
             OngoingMatchesService.getInstance().deleteMatch(matchId);
         }
     }

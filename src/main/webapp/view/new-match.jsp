@@ -5,17 +5,17 @@
     <head>
         <meta charset="UTF-8">
         <title>New match</title>
-        <link rel="stylesheet" href="/css/new-match-style.css">
+        <link rel="stylesheet" href="css/new-match-style.css">
     </head>
     <body>
         <div class="top-menu">
-            <a class="top-menu-link" href="/">HOME</a>
-            <a class="top-menu-link" href="/new-match">NEW</a>
-            <a class="top-menu-link" href="/matches">MATCHES</a>
+            <a class="top-menu-link" href="${pageContext.request.contextPath}/">HOME</a>
+            <a class="top-menu-link" href="new-match">NEW</a>
+            <a class="top-menu-link" href="matches">MATCHES</a>
         </div>
         <div class="page-content">
             <h1 class="page-content-title">Enter the names of players</h1>
-            <form method="post" action="/new-match">
+            <form method="post" action="new-match">
                 <div class="label-with-input">
                     <label for="player1">Player 1:</label>
                     <input type="text" id="player1" name="player1" required>

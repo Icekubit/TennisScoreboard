@@ -5,13 +5,13 @@
     <head>
         <meta charset="UTF-8">
         <title>Match result</title>
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <div class="top-menu">
-            <a class="top-menu-link" href="/">HOME</a>
-            <a class="top-menu-link" href="/new-match">NEW</a>
-            <a class="top-menu-link" href="/matches">MATCHES</a>
+            <a class="top-menu-link" href="${pageContext.request.contextPath}/">HOME</a>
+            <a class="top-menu-link" href="new-match">NEW</a>
+            <a class="top-menu-link" href="matches">MATCHES</a>
         </div>
         <div class="page-content">
             <h1>Match finished! ${winner} wins!</h1>

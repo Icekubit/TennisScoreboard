@@ -20,14 +20,14 @@
                     <label for="player1">Player 1:</label>
                     <input type="text" id="player1" name="player1" required>
                     <c:if test="${isTheSameNames}">
-                        <span style="color: red;">The names should be different</span>
+                        <span class="validation-message">The names should be different</span>
                     </c:if>
                 </div>
                 <div class="label-with-input">
                     <label for="player2">Player 2:</label>
                     <input type="text" id="player2" name="player2" required>
                     <c:if test="${isTheSameNames}">
-                        <span style="color: red;">The names should be different</span>
+                        <span class="validation-message">The names should be different</span>
                     </c:if>
                 </div>
                 <input class="submit-button" type="submit" value="Start">

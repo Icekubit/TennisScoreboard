@@ -37,3 +37,7 @@ body {
 .submit-button {
     margin-left: 45%;
 }
+
+.validation-message {
+    color: red;
+}
